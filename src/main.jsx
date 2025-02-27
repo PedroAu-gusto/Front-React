@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Router basename="/Front-React"> {/* ✅ Adiciona basename para GitHub Pages */}
         <Routes>
           <Route path="/" element={<Login />} />   {/* ✅ Página inicial corrigida */}
-          <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="cadastro" element={<Cadastro />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </Router>

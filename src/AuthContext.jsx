@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         async function checkAuth() {
             try {
-                const response = await fetch('https://node-acad.onrender.com/check-auth', {
+                const response = await fetch('https://node-acad.onrender.com/login', {
                     credentials: 'include',
                 });
 

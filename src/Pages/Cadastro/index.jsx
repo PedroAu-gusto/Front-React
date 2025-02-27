@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom' // 🔹 Importa para redirecionar
 import Trash from '../../assets/trash.png'
 import Edit from '../../assets/edit.png'
 import './style.css'
@@ -6,16 +7,20 @@ import api from '../../services/api'
 
 function Home() {
   const [users, setUsers] = useState([])
+  const navigate = useNavigate() // 🔹 Hook para redirecionamento
 
   const inputName = useRef()
   const inputWeight = useRef()
   const inputHeight = useRef()
 
-
   async function getUsers() {
-    const usersFromApi = await api.get('/usuario')
-
-    setUsers(usersFromApi.data)
+    try {
+      const usersFromApi = await api.get('/usuario')
+      setUsers(usersFromApi.data)
+    } catch (error) {
+      console.error('Usuário não autenticado:', error)
+      navigate('/login') // 🔹 Se não estiver autenticado, redireciona para o login
+    }
   }
 
   async function createUsers() {
@@ -30,7 +35,6 @@ function Home() {
 
   async function deleteUsers(id) {
     await api.delete(`/usuario/${id}`)
-
     getUsers()
   }
 
@@ -40,16 +44,14 @@ function Home() {
       weight: inputWeight.current.value,
       height: inputHeight.current.value
     })
-
     getUsers()
   }
 
   useEffect(() => {
-    getUsers()
+    getUsers() // 🔹 Agora verifica a autenticação antes de carregar os usuários
   }, [])
 
   return (
-
     <div className='container'>
       <form>
         <h1>Cadastro User</h1>
@@ -61,7 +63,6 @@ function Home() {
       </form>
 
       {users.map((user) => (
-
         <div key={user.id} className='card'>
           <div>
             <p>Nome: <span>{user.usernames}</span></p>
@@ -75,12 +76,8 @@ function Home() {
             <img src={Edit} />
           </button>
         </div>
-
       ))}
-
-
     </div>
-
   )
 }
 

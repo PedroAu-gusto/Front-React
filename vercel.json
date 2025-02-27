@@ -1,0 +1,15 @@
+{
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/"
+        }
+    ],
+    "redirects": [
+        {
+            "source": "/cadastro",
+            "destination": "/",
+            "statusCode": 308
+        }
+    ]
+}

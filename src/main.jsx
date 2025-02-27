@@ -9,7 +9,7 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-      <Router basename="/Front-React"> {/* ✅ Adiciona basename para GitHub Pages */}
+      <Router> {/* ✅ Adiciona basename para GitHub Pages */}
         <Routes>
           <Route path="/" element={<Login />} />   {/* ✅ Página inicial corrigida */}
           <Route path="cadastro" element={<Cadastro />} />
